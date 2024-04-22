@@ -27,7 +27,7 @@ use log::{debug, error, info, trace};
 
 use reqwest::{header, Client, StatusCode};
 
-use crate::{BlockStatus, BlockSummary, Builder, Error, MerkleProof, OutputStatus, Tx, TxStatus, UTXO};
+use crate::{BlockStatus, BlockSummary, Builder, Error, MerkleProof, OutputStatus, Tx, TxStatus, Utxo};
 
 #[derive(Debug, Clone)]
 pub struct AsyncClient {
@@ -422,7 +422,7 @@ impl AsyncClient {
     }
 
     /// Get the list of unspent transaction outputs associated with the address.
-    pub async fn get_address_utxo(&self, address: Address) -> Result<Vec<UTXO>, Error> {
+    pub async fn get_address_utxo(&self, address: Address) -> Result<Vec<Utxo>, Error> {
         let resp = self.client
             .get(&format!(
                 "{}/address/{}/utxo",
@@ -442,7 +442,7 @@ impl AsyncClient {
                 message: resp.text().await?,
             })
         } else {
-            Ok(resp.json::<Vec<UTXO>>().await?)
+            Ok(resp.json::<Vec<Utxo>>().await?)
         }
     }
 

@@ -12,7 +12,7 @@ use serde::Deserialize;
 
 
 #[derive(Deserialize, Clone, Debug, PartialEq, Eq)]
-pub struct UTXO {
+pub struct Utxo {
     pub txid: Txid,
     pub vout: u32,
     pub value: Amount,
