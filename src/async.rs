@@ -17,6 +17,7 @@ use std::str::FromStr;
 use bitcoin::consensus::{deserialize, serialize};
 use bitcoin::hashes::{sha256, Hash};
 use bitcoin::hex::{DisplayHex, FromHex};
+use bitcoin::Address;
 use bitcoin::{
     block::Header as BlockHeader, Block, BlockHash, MerkleBlock, Script, Transaction, Txid,
 };
@@ -26,7 +27,7 @@ use log::{debug, error, info, trace};
 
 use reqwest::{header, Client, StatusCode};
 
-use crate::{BlockStatus, BlockSummary, Builder, Error, MerkleProof, OutputStatus, Tx, TxStatus};
+use crate::{BlockStatus, BlockSummary, Builder, Error, MerkleProof, OutputStatus, Tx, TxStatus, UTXO};
 
 #[derive(Debug, Clone)]
 pub struct AsyncClient {
@@ -417,6 +418,31 @@ impl AsyncClient {
             })
         } else {
             Ok(resp.json::<Vec<BlockSummary>>().await?)
+        }
+    }
+
+    /// Get the list of unspent transaction outputs associated with the address.
+    pub async fn get_address_utxo(&self, address: Address) -> Result<Vec<UTXO>, Error> {
+        let resp = self.client
+            .get(&format!(
+                "{}/address/{}/utxo",
+                self.url,
+                address.to_string()
+            ))
+            .send()
+            .await?;
+
+        if let StatusCode::NOT_FOUND = resp.status() {
+            return Ok(vec![]);
+        }
+
+        if resp.status().is_server_error() || resp.status().is_client_error() {
+            Err(Error::HttpResponse {
+                status: resp.status().as_u16(),
+                message: resp.text().await?,
+            })
+        } else {
+            Ok(resp.json::<Vec<UTXO>>().await?)
         }
     }
 

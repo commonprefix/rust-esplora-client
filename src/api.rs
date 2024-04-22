@@ -10,6 +10,15 @@ pub use bitcoin::{
 
 use serde::Deserialize;
 
+
+#[derive(Deserialize, Clone, Debug, PartialEq, Eq)]
+pub struct UTXO {
+    pub txid: Txid,
+    pub vout: u32,
+    pub value: Amount,
+    pub status: TxStatus,
+}
+
 #[derive(Deserialize, Clone, Debug, PartialEq, Eq)]
 pub struct PrevOut {
     pub value: u64,

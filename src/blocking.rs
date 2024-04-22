@@ -15,6 +15,7 @@ use std::collections::HashMap;
 use std::convert::TryFrom;
 use std::str::FromStr;
 
+use bitcoin::Address;
 #[allow(unused_imports)]
 use log::{debug, error, info, trace};
 
@@ -27,7 +28,7 @@ use bitcoin::{
     block::Header as BlockHeader, Block, BlockHash, MerkleBlock, Script, Transaction, Txid,
 };
 
-use crate::{BlockStatus, BlockSummary, Builder, Error, MerkleProof, OutputStatus, Tx, TxStatus};
+use crate::{BlockStatus, BlockSummary, Builder, Error, MerkleProof, OutputStatus, Tx, TxStatus, UTXO};
 
 #[derive(Debug, Clone)]
 pub struct BlockingClient {
@@ -320,6 +321,11 @@ impl BlockingClient {
             None => "/blocks".to_string(),
         };
         self.get_response_json(&path)
+    }
+
+    /// Get the list of unspent transaction outputs associated with the address.
+    pub async fn get_address_utxo(&self, address: Address) -> Result<Vec<UTXO>, Error> {
+        self.get_response_json(&format!("address/{}/utxo", address))
     }
 }
 
