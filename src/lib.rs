@@ -179,7 +179,7 @@ pub enum Error {
     /// Invalid status code, unable to convert to `u16`
     StatusCode(TryFromIntError),
     /// Invalid Bitcoin data returned
-    BitcoinEncoding(bitcoin::consensus::encode::Error),
+    BitcoinEncoding(bitcoin::consensus::encode::DeserializeError),
     /// Invalid hex data returned (attempting to create an array)
     HexToArray(bitcoin::hex::HexToArrayError),
     /// Invalid hex data returned (attempting to create a vector)
@@ -221,7 +221,7 @@ impl_error!(::minreq::Error, Minreq, Error);
 #[cfg(feature = "async")]
 impl_error!(::reqwest::Error, Reqwest, Error);
 impl_error!(std::num::ParseIntError, Parsing, Error);
-impl_error!(consensus::encode::Error, BitcoinEncoding, Error);
+impl_error!(consensus::encode::DeserializeError, BitcoinEncoding, Error);
 impl_error!(bitcoin::hex::HexToArrayError, HexToArray, Error);
 impl_error!(bitcoin::hex::HexToBytesError, HexToBytes, Error);
 

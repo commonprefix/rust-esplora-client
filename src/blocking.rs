@@ -28,7 +28,9 @@ use bitcoin::{
     block::Header as BlockHeader, Block, BlockHash, MerkleBlock, Script, Transaction, Txid,
 };
 
-use crate::{BlockStatus, BlockSummary, Builder, Error, MerkleProof, OutputStatus, Tx, TxStatus, Utxo};
+use crate::{
+    BlockStatus, BlockSummary, Builder, Error, MerkleProof, OutputStatus, Tx, TxStatus, Utxo,
+};
 
 #[derive(Debug, Clone)]
 pub struct BlockingClient {

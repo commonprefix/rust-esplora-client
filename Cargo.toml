@@ -43,7 +43,7 @@ async-https-native = ["async", "reqwest/native-tls"]
 async-https-rustls = ["async", "reqwest/rustls-tls"]
 async-https-rustls-manual-roots = ["async", "reqwest/rustls-tls-manual-roots"]
 
-[patch.crates-io.base58check]
+[patch.crates-io.base58ck]
 git = "https://github.com/storopoli/rust-bitcoin"
 branch = "bitvm"
 
@@ -67,3 +67,8 @@ branch = "bitvm"
 [patch.crates-io.bitcoin-units]
 git = "https://github.com/storopoli/rust-bitcoin"
 branch = "bitvm"
+
+[patch.crates-io.bitcoin-primitives]
+git = "https://github.com/storopoli/rust-bitcoin"
+branch = "bitvm"
+

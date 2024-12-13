@@ -4,17 +4,19 @@
 
 pub use bitcoin::consensus::{deserialize, serialize};
 pub use bitcoin::hex::FromHex;
+use bitcoin::transaction::VersionExt;
 pub use bitcoin::{
-    transaction, Amount, BlockHash, OutPoint, ScriptBuf, Transaction, TxIn, TxOut, Txid, Witness,
+    amount::serde::as_sat, transaction, Amount, BlockHash, OutPoint, ScriptBuf, Transaction, TxIn,
+    TxOut, Txid, Witness,
 };
 
 use serde::Deserialize;
-
 
 #[derive(Deserialize, Clone, Debug, PartialEq, Eq)]
 pub struct Utxo {
     pub txid: Txid,
     pub vout: u32,
+    #[serde(with = "as_sat")]
     pub value: Amount,
     pub status: TxStatus,
 }
