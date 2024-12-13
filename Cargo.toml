@@ -18,7 +18,7 @@ path = "src/lib.rs"
 
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }
-bitcoin = { git = "https://github.com/storopoli/rust-bitcoin", branch = "bitvm" }
+bitcoin = { git = "https://github.com/storopoli/rust-bitcoin", branch = "bitvm", features = ["serde"] }
 hex = { package = "hex-conservative", version = "0.2" }
 log = "^0.4"
 minreq = { version = "2.11.0", features = ["json-using-serde"], optional = true }
