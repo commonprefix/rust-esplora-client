@@ -18,7 +18,7 @@ path = "src/lib.rs"
 
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }
-bitcoin = { git = "https://github.com/storopoli/rust-bitcoin", branch = "bitvm", features = ["serde"] }
+bitcoin = { git = "https://github.com/commonprefix/rust-bitcoin-storopoli", branch = "bitvm", features = ["serde"] }
 hex = { package = "hex-conservative", version = "0.2" }
 log = "^0.4"
 minreq = { version = "2.11.0", features = ["json-using-serde"], optional = true }
@@ -44,31 +44,31 @@ async-https-rustls = ["async", "reqwest/rustls-tls"]
 async-https-rustls-manual-roots = ["async", "reqwest/rustls-tls-manual-roots"]
 
 [patch.crates-io.base58ck]
-git = "https://github.com/storopoli/rust-bitcoin"
+git = "https://github.com/commonprefix/rust-bitcoin-storopoli"
 branch = "bitvm"
 
 [patch.crates-io.bitcoin]
-git = "https://github.com/storopoli/rust-bitcoin"
+git = "https://github.com/commonprefix/rust-bitcoin-storopoli"
 branch = "bitvm"
 features = ["serde"]
 
 [patch.crates-io.bitcoin_hashes]
-git = "https://github.com/storopoli/rust-bitcoin"
+git = "https://github.com/commonprefix/rust-bitcoin-storopoli"
 branch = "bitvm"
 
 [patch.crates-io.bitcoin-internals]
-git = "https://github.com/storopoli/rust-bitcoin"
+git = "https://github.com/commonprefix/rust-bitcoin-storopoli"
 branch = "bitvm"
 
 [patch.crates-io.bitcoin-io]
-git = "https://github.com/storopoli/rust-bitcoin"
+git = "https://github.com/commonprefix/rust-bitcoin-storopoli"
 branch = "bitvm"
 
 [patch.crates-io.bitcoin-units]
-git = "https://github.com/storopoli/rust-bitcoin"
+git = "https://github.com/commonprefix/rust-bitcoin-storopoli"
 branch = "bitvm"
 
 [patch.crates-io.bitcoin-primitives]
-git = "https://github.com/storopoli/rust-bitcoin"
+git = "https://github.com/commonprefix/rust-bitcoin-storopoli"
 branch = "bitvm"
 
